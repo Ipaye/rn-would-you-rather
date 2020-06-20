@@ -2,3 +2,53 @@ body {
   margin: 0;
   font-family: 'Yrsa', serif;
 }
+
+.auth-bg {
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+
+  background: #fff;
+  background-image: url(/assets/app-background.svg);
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: cover;
+}
+
+.auth-container {
+  height: inherit;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-card {
+  background-color: white;
+
+  width: 600px;
+  padding: 20px;
+  border: 1px solid black;
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.02);
+}
+.centered {
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+select,
+input,
+button {
+  font-family: inherit !important;
+}
+
+button {
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+#dashboard-page {
+  padding: 80px 0;
+}
