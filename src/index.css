@@ -1,6 +1,8 @@
 body {
   margin: 0;
   font-family: 'Yrsa', serif;
+  font-size: 17px;
+  line-height: 1.5 !important;
 }
 
 .auth-bg {
@@ -51,4 +53,132 @@ button {
 
 #dashboard-page {
   padding: 80px 0;
+}
+
+.page-header {
+  padding: 1.2rem 0;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+  margin-bottom: 2.4rem;
+  position: relative;
+}
+
+.page-header:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 0.2rem;
+  background: #7b16ff;
+}
+
+.page-header .content {
+  width: 60%;
+  display: flex;
+}
+
+.page-header .content :last-child {
+  margin-left: 20px;
+}
+
+.content-image {
+  width: 70px;
+}
+
+.content-image img {
+  width: 100%;
+  margin-left: 0px !important;
+}
+
+.content .content-details p {
+  margin-left: 0px !important;
+}
+.heading-title {
+  font-size: 1.6rem;
+  margin-bottom: 0px !important;
+}
+
+.box-content {
+  display: flex;
+  justify-content: space-between;
+}
+.box-content.profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.box-content .avatar {
+  width: 200px;
+  border-radius: 50%;
+  text-align: center;
+  align-self: center;
+}
+
+.box-left {
+  font-size: 24px;
+}
+
+.box-left h4 {
+  font-size: 30px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.box-right {
+  text-align: right;
+  font-size: 24px;
+}
+
+.box-right h4 {
+  font-size: 30px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.leader-box {
+  background: #00d1b2;
+  color: white;
+}
+
+.profile-content {
+  text-align: center;
+  margin: 10px 0;
+}
+.profile-content h2 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+table {
+  font-size: 18px;
+}
+
+.table-user {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.table-user .avatar {
+  width: 50px;
+}
+.table-user .content {
+  width: 370px;
+}
+.table-user .content h4 {
+  margin: 0;
+}
+
+.control .radio {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+.control input {
+  margin-right: 10px;
 }
