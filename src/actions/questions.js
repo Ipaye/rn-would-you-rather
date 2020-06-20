@@ -12,9 +12,10 @@ function addQuestion(question) {
   }
 }
 
-export function getQuestions() {
+export function getQuestions(questions) {
   return {
     type: GET_QUESTIONS,
+    questions,
   }
 }
 
@@ -28,6 +29,16 @@ function saveAnswerToQuestion({ authedUser, qid, answer }) {
 }
 
 // Action Creators
+export function refetchQuestions() {
+  return async (dispatch, getState) => {
+    dispatch(showLoading())
+
+    return _getQuestions()
+      .then((question) => dispatch(getQuestions(question)))
+      .then(() => dispatch(hideLoading()))
+  }
+}
+
 export function handleAddQuestion(question) {
   return async (dispatch, getState) => {
     const { authenticatedUser } = getState()
@@ -35,7 +46,7 @@ export function handleAddQuestion(question) {
     dispatch(showLoading())
 
     return _saveQuestion({ author: authenticatedUser, ...question })
-      .then((tweet) => dispatch(addQuestion(question)))
+      .then((newQuestion) => dispatch(addQuestion(newQuestion)))
       .then(() => dispatch(hideLoading()))
   }
 }
@@ -46,7 +57,7 @@ export function handleSaveAnswerToQuestion(questionDetails) {
 
     return _saveQuestionAnswer(questionDetails)
       .then((_) => dispatch(saveAnswerToQuestion()))
-      .then((_) => dispatch(getQuestions()))
+      .then((_) => dispatch(refetchQuestions()))
       .then(() => dispatch(hideLoading()))
       .catch((e) => {
         alert('The was an error answering the question. Try again.')
