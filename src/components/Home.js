@@ -12,7 +12,19 @@ class Home extends Component {
     return (
       <div className="container">
         <Navigation />
-        <section id="dashboard-page">
+        <div class="page-header mt-5">
+          <div class="content">
+            <div className="content-image">
+              <img src="/assets/icons/avatar4.png" alt="" />
+            </div>
+            <div class="content-details">
+              <h1 className="heading-title">Dashboard</h1>
+              <p>View all the listing of all the questions, answered and unanswered questions</p>
+            </div>
+          </div>
+        </div>
+
+        <section>
           <div class="columns">
             <div class="column is-3">
               <aside class="menu">

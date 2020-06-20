@@ -14,8 +14,13 @@ class Leaderboard extends Component {
 
         <div class="page-header mt-5">
           <div class="content">
-            <h1 className="heading-title">Leaderboard</h1>
-            <p>View all the details and ranking of all the users</p>
+            <div className="content-image">
+              <img src="/assets/icons/avatar5.png" alt="" />
+            </div>
+            <div class="content-details">
+              <h1 className="heading-title">Leaderboard</h1>
+              <p>View all the details and ranking of all the users</p>
+            </div>
           </div>
         </div>
 
