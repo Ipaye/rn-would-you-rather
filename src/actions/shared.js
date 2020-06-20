@@ -8,7 +8,7 @@ export function handleInitialData() {
   return (dispatch) => {
     dispatch(showLoading())
 
-    return Promise.all([_getQuestions, _getUsers]).then(([questions, users]) => {
+    return Promise.all([_getQuestions(), _getUsers()]).then(([questions, users]) => {
       dispatch(getUsers(users))
       dispatch(getQuestions(questions))
 
