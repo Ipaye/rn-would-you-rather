@@ -33,6 +33,10 @@ class Navigation extends Component {
           </div>
 
           <div class="navbar-end">
+            <div class="navbar-item profile">
+              <img src="/assets/avatars/1.png" alt="profile image" />
+              <p className="ml-2">Ipaye Alameen</p>
+            </div>
             <div class="navbar-item">
               <div class="buttons">
                 <button class="button is-light">Log out</button>
