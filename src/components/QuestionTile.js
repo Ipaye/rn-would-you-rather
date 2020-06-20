@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 class QuestionTile extends Component {
   static propTypes = {
@@ -8,41 +9,26 @@ class QuestionTile extends Component {
 
   render() {
     return (
-      <div className="mt-2 mb-5">
+      <div className="mt-2 mb-1">
         <div class="box">
           <article class="media">
             <div class="media-left">
               <figure class="image is-64x64">
-                <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image" />
+                <img src="/assets/avatars/1.png" alt="Image" />
               </figure>
             </div>
             <div class="media-content">
               <div class="content">
                 <p>
                   <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
-                  <br />
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum
-                  luctus turpis.
+                  <div>asked</div>
+                  Would you rather <span>Do option one </span> <strong>OR</strong> <span>Do option two</span>
                 </p>
               </div>
               <nav class="level is-mobile">
-                <div class="level-left">
-                  <a class="level-item" aria-label="reply">
-                    <span class="icon is-small">
-                      <i class="fas fa-reply" aria-hidden="true"></i>
-                    </span>
-                  </a>
-                  <a class="level-item" aria-label="retweet">
-                    <span class="icon is-small">
-                      <i class="fas fa-retweet" aria-hidden="true"></i>
-                    </span>
-                  </a>
-                  <a class="level-item" aria-label="like">
-                    <span class="icon is-small">
-                      <i class="fas fa-heart" aria-hidden="true"></i>
-                    </span>
-                  </a>
-                </div>
+                <Link to="question/1" className="button">
+                  View Poll
+                </Link>
               </nav>
             </div>
           </article>
