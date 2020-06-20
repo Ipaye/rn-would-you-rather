@@ -79,6 +79,24 @@ button {
 
 .page-header .content {
   width: 60%;
+  display: flex;
+}
+
+.page-header .content :last-child {
+  margin-left: 20px;
+}
+
+.content-image {
+  width: 70px;
+}
+
+.content-image img {
+  width: 100%;
+  margin-left: 0px !important;
+}
+
+.content .content-details p {
+  margin-left: 0px !important;
 }
 .heading-title {
   font-size: 1.6rem;
@@ -153,4 +171,14 @@ table {
 }
 .table-user .content h4 {
   margin: 0;
+}
+
+.control .radio {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+.control input {
+  margin-right: 10px;
 }
