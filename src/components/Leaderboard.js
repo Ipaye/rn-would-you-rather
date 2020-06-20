@@ -47,7 +47,7 @@ class Leaderboard extends Component {
           </div>
 
           <div class="column">
-            <div class="box">
+            <div class="box leaderbox">
               <table class="table is-fullwidth">
                 <thead>
                   <tr>
@@ -64,7 +64,7 @@ class Leaderboard extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr class="is-selected">
                     <th>1</th>
                     <td style={{ width: '100px' }}>
                       <div class="table-user">
