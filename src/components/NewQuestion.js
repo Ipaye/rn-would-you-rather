@@ -16,41 +16,41 @@ class NewQuestion extends Component {
     return (
       <div className="container">
         <Navigation />
-        <div class="page-header mt-5">
-          <div class="content">
+        <div className="page-header mt-5">
+          <div className="content">
             <div className="content-image">
               <img src="/assets/icons/avatar2.png" alt="" />
             </div>
-            <div class="content-details">
+            <div className="content-details">
               <h1 className="heading-title">Create New Question</h1>
               <p>Start creating questions, Create two options then submit them</p>
             </div>
           </div>
         </div>
 
-        <div class="box columns">
-          <div class="column is-7">
+        <div className="box columns">
+          <div className="column is-7">
             <h2 style={{ fontSize: '30px' }}>Would you Rather ?</h2>
-            <div class="field mt-5">
-              <label class="label">Option 1</label>
-              <div class="control">
-                <input class="input" type="text" placeholder="Enter the first option" />
+            <div className="field mt-5">
+              <label className="label">Option 1</label>
+              <div className="control">
+                <input className="input" type="text" placeholder="Enter the first option" />
               </div>
             </div>
 
-            <div class="field">
-              <label class="label">Option 2</label>
-              <div class="control">
-                <input class="input" type="text" placeholder="Enter the second option" />
+            <div className="field">
+              <label className="label">Option 2</label>
+              <div className="control">
+                <input className="input" type="text" placeholder="Enter the second option" />
               </div>
             </div>
 
-            <div class="field is-grouped">
-              <div class="control">
-                <button class="button is-link">Submit</button>
+            <div className="field is-grouped">
+              <div className="control">
+                <button className="button is-link">Submit</button>
               </div>
-              <div class="control">
-                <button onClick={this.handleCancel} class="button is-link is-light">
+              <div className="control">
+                <button onClick={this.handleCancel} className="button is-link is-light">
                   Cancel
                 </button>
               </div>

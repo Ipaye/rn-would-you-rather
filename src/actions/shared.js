@@ -11,12 +11,12 @@ export function handleInitialData() {
 
     return Promise.all([_getQuestions(), _getUsers()]).then(([questions, users]) => {
       dispatch(getUsers(users))
+      dispatch(getQuestions(questions))
+
       const activeUser = localStorage.getItem('active-user')
       if (activeUser) {
         dispatch(loginUser(activeUser))
       }
-      dispatch(getQuestions(questions))
-
       dispatch(hideLoading())
     })
   }
