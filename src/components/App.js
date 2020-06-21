@@ -23,14 +23,26 @@ class App extends React.Component {
           <LoadingBar />
 
           <Route path="/" exact component={Login} />
-          <Route path="/dashboard" exact component={Home} />
-          <Route path="/question/:id" component={QuestionDetails} />
-          <Route path="/add" component={NewQuestion} />
-          <Route path="/leaderboard" component={Leaderboard} />
+          {this.props.loading === false ? (
+            <p>Please wait...</p>
+          ) : (
+            <div>
+              <Route path="/dashboard" exact component={Home} />
+              <Route path="/question/:id" component={QuestionDetails} />
+              <Route path="/add" component={NewQuestion} />
+              <Route path="/leaderboard" component={Leaderboard} />
+            </div>
+          )}
         </Fragment>
       </Router>
     )
   }
 }
 
-export default connect()(App)
+function mapStateToProps({ authenticatedUser }) {
+  console.log('[authenticated] ->', authenticatedUser)
+  return {
+    loading: !!authenticatedUser,
+  }
+}
+export default connect(mapStateToProps)(App)
