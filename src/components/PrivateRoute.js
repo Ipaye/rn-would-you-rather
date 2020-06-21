@@ -3,10 +3,7 @@ import { connect } from 'react-redux'
 import { Redirect, Route, withRouter } from 'react-router-dom'
 
 function PrivateRoute({ children, component: Component, ...rest }) {
-  const {
-    authenticatedUser,
-    match: { params },
-  } = rest
+  const { authenticatedUser } = rest
   return (
     <Route
       {...rest}
