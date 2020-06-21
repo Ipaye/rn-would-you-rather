@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Link, withRouter } from 'react-router-dom'
 
 class QuestionTile extends Component {
   static propTypes = {
@@ -14,19 +15,20 @@ class QuestionTile extends Component {
           <article class="media">
             <div class="media-left">
               <figure class="image is-64x64">
-                <img src="/assets/avatars/1.png" alt="Image" />
+                <img src={this.props.author.avatarURL} alt="Image" />
               </figure>
             </div>
             <div class="media-content">
               <div class="content">
-                <p>
-                  <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
+                <div>
+                  <strong>{this.props.author.name}</strong> <small>@j{this.props.author.id}</small>
                   <div>asked</div>
-                  Would you rather <span>Do option one </span> <strong>OR</strong> <span>Do option two</span>
-                </p>
+                  Would you rather <span>{this.props.question.optionOne.text}</span> <strong>OR</strong>{' '}
+                  <span>{this.props.question.optionTwo.text}</span>
+                </div>
               </div>
               <nav class="level is-mobile">
-                <Link to="question/1" className="button">
+                <Link to={`/question/${this.props.question.id}`} className="button">
                   View Poll
                 </Link>
               </nav>
@@ -38,4 +40,14 @@ class QuestionTile extends Component {
   }
 }
 
-export default QuestionTile
+function mapStateToProps({ users, questions }, { id }) {
+  const question = questions[id]
+  const author = users[questions[id].author]
+
+  return {
+    question,
+    author,
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(QuestionTile))
