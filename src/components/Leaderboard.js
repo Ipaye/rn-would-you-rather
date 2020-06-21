@@ -65,7 +65,7 @@ class Leaderboard extends Component {
                 </thead>
                 <tbody>
                   {this.props.userList.map((user, index) => (
-                    <tr className={user == this.props.authenticatedUser ? 'is-selected' : null}>
+                    <tr key={index} className={user === this.props.authenticatedUser ? 'is-selected' : null}>
                       <th>{index + 1}</th>
                       <td style={{ width: '100px' }}>
                         <div className="table-user">
