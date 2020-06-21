@@ -19,15 +19,6 @@ export function getQuestions(questions) {
   }
 }
 
-function saveAnswerToQuestion({ authedUser, qid, answer }) {
-  return {
-    type: SAVE_QUESTION_ANSWER,
-    authedUser,
-    qid,
-    answer,
-  }
-}
-
 // Action Creators
 export function refetchQuestions() {
   return async (dispatch, getState) => {
@@ -55,11 +46,12 @@ export function handleAddQuestion(question) {
 }
 
 export function handleSaveAnswerToQuestion(questionDetails) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch(showLoading())
 
-    return _saveQuestionAnswer(questionDetails)
-      .then((_) => dispatch(saveAnswerToQuestion()))
+    const { authenticatedUser } = getState()
+
+    return _saveQuestionAnswer({ authedUser: authenticatedUser, qid: questionDetails.question, answer: questionDetails.selectedOption })
       .then((_) => dispatch(refetchQuestions()))
       .then(() => dispatch(hideLoading()))
       .catch((e) => {

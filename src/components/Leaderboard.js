@@ -5,7 +5,9 @@ import Navigation from './Navigation'
 
 class Leaderboard extends Component {
   static propTypes = {
-    prop: PropTypes,
+    users: PropTypes.object.isRequired,
+    userList: PropTypes.array.isRequired,
+    authenticatedUser: PropTypes.string.isRequired,
   }
 
   render() {

@@ -5,7 +5,8 @@ import { Link, withRouter } from 'react-router-dom'
 
 class QuestionTile extends Component {
   static propTypes = {
-    prop: PropTypes,
+    question: PropTypes.object.isRequired,
+    author: PropTypes.object.isRequired,
   }
 
   render() {

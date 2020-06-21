@@ -6,7 +6,9 @@ import QuestionTile from './QuestionTile'
 
 class Home extends Component {
   static propTypes = {
-    prop: PropTypes,
+    loading: PropTypes.bool.isRequired,
+    answeredQuestions: PropTypes.array.isRequired,
+    unAnsweredQuestions: PropTypes.array.isRequired,
   }
 
   state = {
@@ -46,12 +48,20 @@ class Home extends Component {
                 <p className="menu-label">Question Categories</p>
                 <ul className="menu-list">
                   <li>
-                    <a href className={questionType === 'unAnswered' ? 'is-active' : null} onClick={(e) => this.handleQuestionState(e, 'unAnswered')}>
+                    <a
+                      href="true"
+                      className={questionType === 'unAnswered' ? 'is-active' : null}
+                      onClick={(e) => this.handleQuestionState(e, 'unAnswered')}
+                    >
                       Unanswered
                     </a>
                   </li>
                   <li className="mt-2">
-                    <a href className={questionType === 'answered' ? 'is-active' : null} onClick={(e) => this.handleQuestionState(e, 'answered')}>
+                    <a
+                      href="true"
+                      className={questionType === 'answered' ? 'is-active' : null}
+                      onClick={(e) => this.handleQuestionState(e, 'answered')}
+                    >
                       Answered
                     </a>
                   </li>

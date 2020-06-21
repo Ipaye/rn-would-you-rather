@@ -3,7 +3,6 @@ import { showLoading, hideLoading } from 'react-redux-loading'
 import { _getQuestions, _getUsers } from '../utils/_data'
 import { getUsers } from '../actions/users'
 import { getQuestions } from '../actions/questions'
-import { loginUser } from './auth'
 
 export function handleInitialData() {
   return (dispatch) => {
@@ -13,10 +12,6 @@ export function handleInitialData() {
       dispatch(getUsers(users))
       dispatch(getQuestions(questions))
 
-      // const activeUser = localStorage.getItem('active-user')
-      // if (activeUser) {
-      //   dispatch(loginUser(activeUser))
-      // }
       dispatch(hideLoading())
     })
   }
