@@ -20,7 +20,7 @@ class Navigation extends Component {
             <img src="/assets/icons/logo.png" alt="logo" />
           </NavLink>
 
-          <a role="button" href className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <a role="button" href="true" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>

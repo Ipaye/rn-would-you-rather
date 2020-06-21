@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Navigation from './Navigation'
 
@@ -27,25 +28,16 @@ class Leaderboard extends Component {
         <div className="columns">
           <div className="column is-4">
             <div className="box">
-              <div className="box-content">
-                <div className="box-left">
-                  <div>My Rank</div>
-                  <h4>3rd Place</h4>
-                </div>
-                <div className="box-right">
-                  <div>My Score</div>
-                  <h4>12</h4>
-                </div>
-              </div>
-            </div>
-
-            <div className="box">
               <div className="box-content profile">
-                <img src="/assets/avatars/1.png" className="avatar" alt="" />
+                <img
+                  src={this.props.users[this.props.authenticatedUser].avatarURL}
+                  className="avatar"
+                  alt={this.props.users[this.props.authenticatedUser].name}
+                />
 
                 <div className="profile-content">
-                  <h2>Fellani Max payne</h2>
-                  <h5>@fgelaniPaymen</h5>
+                  <h2>{this.props.users[this.props.authenticatedUser].name}</h2>
+                  <h5>@{this.props.users[this.props.authenticatedUser].id}</h5>
                 </div>
               </div>
             </div>
@@ -64,43 +56,33 @@ class Leaderboard extends Component {
                       <span title="Answered Questions">Answered</span>
                     </th>
                     <th>
+                      <span title="Questions count">Questions</span>
+                    </th>
+                    <th>
                       <abbr title="Points gotten">Points</abbr>
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="is-selected">
-                    <th>1</th>
-                    <td style={{ width: '100px' }}>
-                      <div className="table-user">
-                        <div className="avatar">
-                          <img src="/assets/avatars/1.png" alt="" />
+                  {this.props.userList.map((user, index) => (
+                    <tr key={index} className={user === this.props.authenticatedUser ? 'is-selected' : null}>
+                      <th>{index + 1}</th>
+                      <td style={{ width: '100px' }}>
+                        <div className="table-user">
+                          <div className="avatar">
+                            <img src={this.props.users[user].avatarURL} alt="" />
+                          </div>
+                          <div className="content ml-3">
+                            <h4>{this.props.users[user].name}</h4>
+                            <p>@{this.props.users[user].id}</p>
+                          </div>
                         </div>
-                        <div className="content ml-3">
-                          <h4>Ipaye Alameen</h4>
-                          <p>@alameen</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>38</td>
-                    <td>23</td>
-                  </tr>
-                  <tr>
-                    <th>1</th>
-                    <td style={{ width: '100px' }}>
-                      <div className="table-user">
-                        <div class="avatar">
-                          <img src="/assets/avatars/1.png" alt="" />
-                        </div>
-                        <div class="content ml-3">
-                          <h4>Ipaye Alameen</h4>
-                          <p>@alameen</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>38</td>
-                    <td>23</td>
-                  </tr>
+                      </td>
+                      <td>{Object.keys(this.props.users[user].answers).length}</td>
+                      <td>{Object.keys(this.props.users[user].questions).length}</td>
+                      <td>{Object.keys(this.props.users[user].answers).length + Object.keys(this.props.users[user].questions).length}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -111,4 +93,16 @@ class Leaderboard extends Component {
   }
 }
 
-export default Leaderboard
+function mapStateToProps({ authenticatedUser, users }) {
+  let userList = Object.keys(users).sort((a, b) => {
+    return users[b].answers.length + users[b].questions.length - (users[a].answers.length + users[a].questions.length)
+  })
+
+  return {
+    users,
+    userList,
+    authenticatedUser,
+  }
+}
+
+export default connect(mapStateToProps)(Leaderboard)
