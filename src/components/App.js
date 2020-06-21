@@ -25,7 +25,7 @@ class App extends React.Component {
         <Switch>
           <Route path="/" exact component={Login} />
           <PrivateRoute path="/dashboard" exact component={Home} />
-          <PrivateRoute path="/question/:id" exact component={QuestionDetails} />
+          <PrivateRoute path="/questions/:id" exact component={QuestionDetails} />
           <PrivateRoute path="/add" exact component={NewQuestion} />
           <PrivateRoute path="/leaderboard" exact component={Leaderboard} />
           <Route path="/404" component={NotFound} />
