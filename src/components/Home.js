@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Navigation from './Navigation'
 import QuestionTile from './QuestionTile'
@@ -8,7 +9,21 @@ class Home extends Component {
     prop: PropTypes,
   }
 
+  state = {
+    questionType: 'unAnswered',
+  }
+
+  handleQuestionState = (e, value) => {
+    e.preventDefault()
+    if (value == 'unAnswered') {
+      this.setState({ questionType: 'unAnswered' })
+    } else {
+      this.setState({ questionType: 'answered' })
+    }
+  }
+
   render() {
+    const { questionType } = this.state
     return (
       <div className="container">
         <Navigation />
@@ -31,21 +46,22 @@ class Home extends Component {
                 <p class="menu-label">Question Categories</p>
                 <ul class="menu-list">
                   <li>
-                    <a className="is-active">Unanswered</a>
+                    <a className={questionType == 'unAnswered' ? 'is-active' : null} onClick={(e) => this.handleQuestionState(e, 'unAnswered')}>
+                      Unanswered
+                    </a>
                   </li>
                   <li className="mt-2">
-                    <a>Answered</a>
+                    <a className={questionType == 'answered' ? 'is-active' : null} onClick={(e) => this.handleQuestionState(e, 'answered')}>
+                      Answered
+                    </a>
                   </li>
                 </ul>
               </aside>
             </div>
             <div class="column">
-              <QuestionTile />
-              <QuestionTile />
-              <QuestionTile />
-              <QuestionTile />
-              <QuestionTile />
-              <QuestionTile />
+              {questionType == 'unAnswered'
+                ? this.props.unAnsweredQuestions.map((id) => <QuestionTile key={id} id={id} />)
+                : this.props.answeredQuestions.map((id) => <QuestionTile key={id} id={id} />)}
             </div>
           </div>
         </section>
@@ -54,4 +70,17 @@ class Home extends Component {
   }
 }
 
-export default Home
+function mapStateToProps({ authenticatedUser, users, questions }) {
+  let activeUserAnsweredQuestions = users[authenticatedUser].questions
+  questions = Object.keys(questions).sort((a, b) => questions[b].timestamp - questions[a].timestamp)
+
+  const answeredQuestions = questions.filter((question) => activeUserAnsweredQuestions.includes(question))
+  const unAnsweredQuestions = questions.filter((question) => !activeUserAnsweredQuestions.includes(question))
+  return {
+    loading: questions ? false : true,
+    answeredQuestions,
+    unAnsweredQuestions,
+  }
+}
+
+export default connect(mapStateToProps)(Home)
