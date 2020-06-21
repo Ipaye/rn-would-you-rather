@@ -14,42 +14,42 @@ class Navigation extends Component {
   }
   render() {
     return (
-      <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-          <NavLink to="/" class="navbar-item" href="https://bulma.io">
+      <nav className="navbar" role="navigation" aria-label="main navigation">
+        <div className="navbar-brand">
+          <NavLink to="/" className="navbar-item" href="https://bulma.io">
             <img src="/assets/icons/logo.png" alt="logo" />
           </NavLink>
 
-          <a role="button" href class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <a role="button" href className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
           </a>
         </div>
 
-        <div id="navbarBasicExample" class="navbar-menu">
-          <div class="navbar-end">
-            <NavLink to="/dashboard" class="navbar-item">
+        <div id="navbarBasicExample" className="navbar-menu">
+          <div className="navbar-end">
+            <NavLink to="/dashboard" className="navbar-item">
               Home
             </NavLink>
 
-            <NavLink to="/leaderboard" class="navbar-item">
+            <NavLink to="/leaderboard" className="navbar-item">
               Leaderboard
             </NavLink>
 
-            <NavLink to="/add" class="navbar-item">
+            <NavLink to="/add" className="navbar-item">
               New Question
             </NavLink>
           </div>
 
-          <div class="navbar-end">
-            <div class="navbar-item profile">
+          <div className="navbar-end">
+            <div className="navbar-item profile">
               <img src={this.props.activeUser.avatarURL} alt="ipaye alameen" />
               <p className="ml-2">{this.props.activeUser.name}</p>
             </div>
-            <div class="navbar-item">
-              <div class="buttons">
-                <button onClick={this.handleLogout} class="button is-light">
+            <div className="navbar-item">
+              <div className="buttons">
+                <button onClick={this.handleLogout} className="button is-light">
                   Log out
                 </button>
               </div>

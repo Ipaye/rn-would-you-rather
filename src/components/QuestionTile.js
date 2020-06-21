@@ -11,15 +11,15 @@ class QuestionTile extends Component {
   render() {
     return (
       <div className="mt-2 mb-1">
-        <div class="box">
-          <article class="media">
-            <div class="media-left">
-              <figure class="image is-64x64">
-                <img src={this.props.author.avatarURL} alt="Image" />
+        <div className="box">
+          <article className="media">
+            <div className="media-left">
+              <figure className="image is-64x64">
+                <img src={this.props.author.avatarURL} alt={this.props.author.name} />
               </figure>
             </div>
-            <div class="media-content">
-              <div class="content">
+            <div className="media-content">
+              <div className="content">
                 <div>
                   <strong>{this.props.author.name}</strong> <small>@j{this.props.author.id}</small>
                   <div>asked</div>
@@ -27,7 +27,7 @@ class QuestionTile extends Component {
                   <span>{this.props.question.optionTwo.text}</span>
                 </div>
               </div>
-              <nav class="level is-mobile">
+              <nav className="level is-mobile">
                 <Link to={`/question/${this.props.question.id}`} className="button">
                   View Poll
                 </Link>

@@ -12,38 +12,38 @@ class Leaderboard extends Component {
       <div className="container">
         <Navigation />
 
-        <div class="page-header mt-5">
-          <div class="content">
+        <div className="page-header mt-5">
+          <div className="content">
             <div className="content-image">
               <img src="/assets/icons/avatar5.png" alt="" />
             </div>
-            <div class="content-details">
+            <div className="content-details">
               <h1 className="heading-title">Leaderboard</h1>
               <p>View all the details and ranking of all the users</p>
             </div>
           </div>
         </div>
 
-        <div class="columns">
-          <div class="column is-4">
-            <div class="box">
-              <div class="box-content">
-                <div class="box-left">
+        <div className="columns">
+          <div className="column is-4">
+            <div className="box">
+              <div className="box-content">
+                <div className="box-left">
                   <div>My Rank</div>
                   <h4>3rd Place</h4>
                 </div>
-                <div class="box-right">
+                <div className="box-right">
                   <div>My Score</div>
                   <h4>12</h4>
                 </div>
               </div>
             </div>
 
-            <div class="box">
-              <div class="box-content profile">
+            <div className="box">
+              <div className="box-content profile">
                 <img src="/assets/avatars/1.png" className="avatar" alt="" />
 
-                <div class="profile-content">
+                <div className="profile-content">
                   <h2>Fellani Max payne</h2>
                   <h5>@fgelaniPaymen</h5>
                 </div>
@@ -51,9 +51,9 @@ class Leaderboard extends Component {
             </div>
           </div>
 
-          <div class="column">
-            <div class="box leaderbox">
-              <table class="table is-fullwidth">
+          <div className="column">
+            <div className="box leaderbox">
+              <table className="table is-fullwidth">
                 <thead>
                   <tr>
                     <th>
@@ -69,14 +69,14 @@ class Leaderboard extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="is-selected">
+                  <tr className="is-selected">
                     <th>1</th>
                     <td style={{ width: '100px' }}>
-                      <div class="table-user">
-                        <div class="avatar">
+                      <div className="table-user">
+                        <div className="avatar">
                           <img src="/assets/avatars/1.png" alt="" />
                         </div>
-                        <div class="content ml-3">
+                        <div className="content ml-3">
                           <h4>Ipaye Alameen</h4>
                           <p>@alameen</p>
                         </div>
@@ -88,7 +88,7 @@ class Leaderboard extends Component {
                   <tr>
                     <th>1</th>
                     <td style={{ width: '100px' }}>
-                      <div class="table-user">
+                      <div className="table-user">
                         <div class="avatar">
                           <img src="/assets/avatars/1.png" alt="" />
                         </div>
