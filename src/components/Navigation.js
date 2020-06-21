@@ -1,16 +1,26 @@
 import React, { Component } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { NavLink, withRouter } from 'react-router-dom'
+
+import { logoutUser } from '../actions/auth'
 
 class Navigation extends Component {
+  handleLogout = (e) => {
+    e.preventDefault()
+
+    this.props.dispatch(logoutUser())
+    this.props.history.push('/')
+    localStorage.clear()
+  }
   render() {
     return (
       <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
           <NavLink to="/" class="navbar-item" href="https://bulma.io">
-            <img src="/assets/icons/logo.png" />
+            <img src="/assets/icons/logo.png" alt="logo" />
           </NavLink>
 
-          <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <a role="button" href class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -34,12 +44,14 @@ class Navigation extends Component {
 
           <div class="navbar-end">
             <div class="navbar-item profile">
-              <img src="/assets/avatars/1.png" alt="profile image" />
-              <p className="ml-2">Ipaye Alameen</p>
+              <img src={this.props.activeUser.avatarURL} alt="ipaye alameen" />
+              <p className="ml-2">{this.props.activeUser.name}</p>
             </div>
             <div class="navbar-item">
               <div class="buttons">
-                <button class="button is-light">Log out</button>
+                <button onClick={this.handleLogout} class="button is-light">
+                  Log out
+                </button>
               </div>
             </div>
           </div>
@@ -49,4 +61,11 @@ class Navigation extends Component {
   }
 }
 
-export default Navigation
+function mapStateToProps({ authenticatedUser, users }) {
+  const activeUser = users[authenticatedUser]
+  return {
+    activeUser,
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(Navigation))
