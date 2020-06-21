@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Navigation from './Navigation'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
 class QuestionDetails extends Component {
   static propTypes = {
@@ -15,6 +16,9 @@ class QuestionDetails extends Component {
 
   render() {
     const { author } = this.props
+    if (!author) {
+      return <Redirect to="/404" />
+    }
     return (
       <div className="container">
         <Navigation />
@@ -139,9 +143,14 @@ class QuestionDetails extends Component {
 }
 
 function mapStateToProps({ users, authenticatedUser, questions }, props) {
+  console.log('[props] ->', props)
   const { id } = props.match.params
   const question = questions[id]
-  const author = users[question.author]
+  let author
+  console.log('[question, id ] ->', props.history)
+  if (question) {
+    author = users[question.author]
+  }
 
   let activeUserAnsweredQuestions = Object.keys(users[authenticatedUser].answers)
   let hasAnsweredQuestion = activeUserAnsweredQuestions.includes(id)

@@ -13,10 +13,10 @@ export function handleInitialData() {
       dispatch(getUsers(users))
       dispatch(getQuestions(questions))
 
-      const activeUser = localStorage.getItem('active-user')
-      if (activeUser) {
-        dispatch(loginUser(activeUser))
-      }
+      // const activeUser = localStorage.getItem('active-user')
+      // if (activeUser) {
+      //   dispatch(loginUser(activeUser))
+      // }
       dispatch(hideLoading())
     })
   }
