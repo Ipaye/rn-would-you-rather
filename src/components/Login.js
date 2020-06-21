@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-
 import { loginUser } from '../actions/auth'
 
 class Login extends Component {
@@ -20,12 +19,23 @@ class Login extends Component {
   }
 
   handleLogin = (event) => {
+    let from
+    if (this.props.location.state) {
+      from = this.props.location.state.from
+    } else {
+      from = '/'
+    }
+    console.log('[from] ->', from)
     event.preventDefault()
     const { user } = this.state
     localStorage.setItem('active-user', user)
-
     this.props.dispatch(loginUser(user))
-    this.props.history.push('/dashboard')
+
+    if (from != '/') {
+      this.props.history.push(from)
+    } else {
+      this.props.history.push('/dashboard')
+    }
   }
 
   render() {
