@@ -16,8 +16,8 @@ function NotFound(props) {
             <div className="column">
               <div className="field">
                 <div className="control">
-                  <button className="button is-fullwidth is-link" onClick={() => props.history.push('/')}>
-                    Go back to Login
+                  <button className="button is-fullwidth is-link" onClick={() => props.history.push('/dashboard')}>
+                    Go to Dashboard
                   </button>
                 </div>
               </div>
