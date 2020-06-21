@@ -22,6 +22,7 @@ class Login extends Component {
   handleLogin = (event) => {
     event.preventDefault()
     const { user } = this.state
+    localStorage.setItem('active-user', user)
 
     this.props.dispatch(loginUser(user))
     this.props.history.push('/dashboard')
