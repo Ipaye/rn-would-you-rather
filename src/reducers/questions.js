@@ -1,4 +1,4 @@
-import { ADD_QUESTIONS, GET_QUESTIONS, SAVE_QUESTION_ANSWER } from '../actions/questions'
+import { ADD_QUESTION, GET_QUESTIONS, SAVE_QUESTION_ANSWER } from '../actions/questions'
 
 export default function questions(state = {}, action) {
   switch (action.type) {
@@ -18,23 +18,10 @@ export default function questions(state = {}, action) {
               : state[action.id].likes.concat([action.authedUser]),
         },
       }
-    case ADD_QUESTIONS:
-      const { tweet } = action
-
-      let replyingTo = {}
-      if (tweet.replyingTo !== null) {
-        replyingTo = {
-          [tweet.replyingTo]: {
-            ...state[tweet.replyingTo],
-            replies: state[tweet.replyingTo].replies.concat([tweet.id]),
-          },
-        }
-      }
-
+    case ADD_QUESTION:
       return {
         ...state,
-        [action.tweet.id]: action.tweet,
-        ...replyingTo,
+        [action.question.id]: action.question,
       }
     default:
       return state

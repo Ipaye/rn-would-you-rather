@@ -1,10 +1,43 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { handleAddQuestion } from '../actions/questions'
 import Navigation from './Navigation'
+import { Redirect } from 'react-router-dom'
 
 class NewQuestion extends Component {
   static propTypes = {
-    prop: PropTypes,
+    dispatch: PropTypes.func.isRequired,
+  }
+
+  state = {
+    option1: '',
+    option2: '',
+
+    toHome: false,
+  }
+  handleChange = (e) => {
+    const name = e.target.name
+    const text = e.target.value
+
+    this.setState(() => ({
+      [name]: text,
+    }))
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+
+    const { option1, option2 } = this.state
+
+    this.props.dispatch(handleAddQuestion({ option1, option2 }))
+
+    this.setState(() => ({
+      option1: '',
+      option2: '',
+      toHome: true,
+    }))
+    return <Redirect to="/dashboard" />
   }
 
   handleCancel = (e) => {
@@ -13,6 +46,19 @@ class NewQuestion extends Component {
   }
 
   render() {
+    const { option1, option2, toHome } = this.state
+    let disabled
+
+    if (!option1 || !option2) {
+      disabled = true
+    } else {
+      disabled = false
+    }
+
+    if (toHome === true) {
+      return <Redirect to="/dashboard" />
+    }
+
     return (
       <div className="container">
         <Navigation />
@@ -34,20 +80,36 @@ class NewQuestion extends Component {
             <div className="field mt-5">
               <label className="label">Option 1</label>
               <div className="control">
-                <input className="input" type="text" placeholder="Enter the first option" />
+                <input
+                  className="input"
+                  type="text"
+                  name="option1"
+                  value={option1}
+                  onChange={this.handleChange}
+                  placeholder="Enter the first option"
+                />
               </div>
             </div>
 
             <div className="field">
               <label className="label">Option 2</label>
               <div className="control">
-                <input className="input" type="text" placeholder="Enter the second option" />
+                <input
+                  className="input"
+                  type="text"
+                  name="option2"
+                  value={option2}
+                  onChange={this.handleChange}
+                  placeholder="Enter the second option"
+                />
               </div>
             </div>
 
             <div className="field is-grouped">
               <div className="control">
-                <button className="button is-link">Submit</button>
+                <button className="button is-link" onClick={this.handleSubmit} disabled={disabled}>
+                  Submit
+                </button>
               </div>
               <div className="control">
                 <button onClick={this.handleCancel} className="button is-link is-light">
@@ -62,4 +124,4 @@ class NewQuestion extends Component {
   }
 }
 
-export default NewQuestion
+export default connect()(NewQuestion)
