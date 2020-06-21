@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import LoadingBar from 'react-redux-loading'
 
 import { handleInitialData } from '../actions/shared'
@@ -11,6 +11,8 @@ import Home from './Home'
 import QuestionDetails from './QuestionDetails'
 import NewQuestion from './NewQuestion'
 import Leaderboard from './Leaderboard'
+import NotFound from './NotFound'
+import PrivateRoute from './PrivateRoute'
 
 class App extends React.Component {
   componentDidMount() {
@@ -19,21 +21,16 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Fragment>
-          <LoadingBar />
-
+        <LoadingBar />
+        <Switch>
           <Route path="/" exact component={Login} />
-          {this.props.loading === false ? (
-            <p>Please wait...</p>
-          ) : (
-            <div>
-              <Route path="/dashboard" exact component={Home} />
-              <Route path="/question/:id" component={QuestionDetails} />
-              <Route path="/add" component={NewQuestion} />
-              <Route path="/leaderboard" component={Leaderboard} />
-            </div>
-          )}
-        </Fragment>
+          <PrivateRoute path="/dashboard" exact component={Home} />
+          <PrivateRoute path="/question/:id" exact component={QuestionDetails} />
+          <PrivateRoute path="/add" exact component={NewQuestion} />
+          <PrivateRoute path="/leaderboard" exact component={Leaderboard} />
+          <Route path="/404" component={NotFound} />
+          <Route path="*" component={NotFound} />
+        </Switch>
       </Router>
     )
   }
