@@ -23,8 +23,6 @@ class QuestionDetails extends Component {
   }
 
   handleOptionChange = (e) => {
-    e.preventDefault()
-
     const value = e.target.value
     console.log('[value] ->', value)
 
