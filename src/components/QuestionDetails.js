@@ -192,11 +192,9 @@ class QuestionDetails extends Component {
 }
 
 function mapStateToProps({ users, authenticatedUser, questions }, props) {
-  console.log('[props] ->', props)
   const { id } = props.match.params
   const question = questions[id]
   let author
-  console.log('[question, id ] ->', props.history)
   if (question) {
     author = users[question.author]
   }

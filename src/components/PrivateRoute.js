@@ -7,7 +7,6 @@ function PrivateRoute({ children, component: Component, ...rest }) {
     authenticatedUser,
     match: { params },
   } = rest
-  console.log('[params] ->', params)
   return (
     <Route
       {...rest}
@@ -28,7 +27,6 @@ function PrivateRoute({ children, component: Component, ...rest }) {
 }
 
 function mapStateToProps({ authenticatedUser }) {
-  console.log('[authenticated] ->', authenticatedUser)
   return {
     authenticatedUser,
   }

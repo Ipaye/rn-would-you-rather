@@ -37,7 +37,6 @@ class App extends React.Component {
 }
 
 function mapStateToProps({ authenticatedUser }) {
-  console.log('[authenticated] ->', authenticatedUser)
   return {
     loading: !!authenticatedUser,
   }

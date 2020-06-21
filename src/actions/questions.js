@@ -38,7 +38,6 @@ export function handleAddQuestion(question) {
 
     return _saveQuestion({ author: authenticatedUser, optionOneText: question.option1, optionTwoText: question.option2 })
       .then((newQuestion) => {
-        console.log('[new question] ->', newQuestion)
         return dispatch(addQuestion(newQuestion))
       })
       .then(() => dispatch(hideLoading()))
