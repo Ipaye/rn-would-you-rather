@@ -2,12 +2,12 @@ import { _getQuestions, _saveQuestion, _saveQuestionAnswer } from '../utils/_dat
 import { showLoading, hideLoading } from 'react-redux-loading'
 
 export const GET_QUESTIONS = 'GET_QUESTIONS'
-export const ADD_QUESTIONS = 'ADD_QUESTIONS'
+export const ADD_QUESTION = 'ADD_QUESTION'
 export const SAVE_QUESTION_ANSWER = 'SAVE_QUESTION_ANSWER'
 
 function addQuestion(question) {
   return {
-    type: ADD_QUESTIONS,
+    type: ADD_QUESTION,
     question,
   }
 }
@@ -45,8 +45,11 @@ export function handleAddQuestion(question) {
 
     dispatch(showLoading())
 
-    return _saveQuestion({ author: authenticatedUser, ...question })
-      .then((newQuestion) => dispatch(addQuestion(newQuestion)))
+    return _saveQuestion({ author: authenticatedUser, optionOneText: question.option1, optionTwoText: question.option2 })
+      .then((newQuestion) => {
+        console.log('[new question] ->', newQuestion)
+        return dispatch(addQuestion(newQuestion))
+      })
       .then(() => dispatch(hideLoading()))
   }
 }
