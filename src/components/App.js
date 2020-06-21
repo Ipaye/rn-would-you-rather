@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import LoadingBar from 'react-redux-loading'
@@ -25,7 +25,7 @@ class App extends React.Component {
         <Switch>
           <Route path="/" exact component={Login} />
           <PrivateRoute path="/dashboard" exact component={Home} />
-          <PrivateRoute path="/question/:id" exact component={QuestionDetails} />
+          <PrivateRoute path="/questions/:id" exact component={QuestionDetails} />
           <PrivateRoute path="/add" exact component={NewQuestion} />
           <PrivateRoute path="/leaderboard" exact component={Leaderboard} />
           <Route path="/404" component={NotFound} />
@@ -37,7 +37,6 @@ class App extends React.Component {
 }
 
 function mapStateToProps({ authenticatedUser }) {
-  console.log('[authenticated] ->', authenticatedUser)
   return {
     loading: !!authenticatedUser,
   }

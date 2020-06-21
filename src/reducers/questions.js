@@ -8,14 +8,26 @@ export default function questions(state = {}, action) {
         ...action.questions,
       }
     case SAVE_QUESTION_ANSWER:
+      const { authedUser, qid, answer } = action
+
       return {
         ...state,
-        [action.id]: {
-          ...state[action.id],
-          likes:
-            action.hasLiked === true
-              ? state[action.id].likes.filter((uid) => uid !== action.authedUser)
-              : state[action.id].likes.concat([action.authedUser]),
+        [qid]: {
+          ...state[qid],
+          optionOne: {
+            ...state[qid].optionOne,
+            votes: [
+              ...state[qid].optionOne.votes,
+              answer === state[qid].optionOne ? state[qid].optionOne.votes.concat(authedUser) : state[qid].optionOne.votes,
+            ],
+          },
+          optionTwo: {
+            ...state[qid].optionTwo,
+            votes: [
+              ...state[qid].optionTwo.votes,
+              answer === state[qid].optionTwo ? state[qid].optionTwo.votes.concat(authedUser) : state[qid].optionTwo.votes,
+            ],
+          },
         },
       }
     case ADD_QUESTION:

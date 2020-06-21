@@ -5,7 +5,9 @@ import { loginUser } from '../actions/auth'
 
 class Login extends Component {
   static propTypes = {
-    prop: PropTypes,
+    loading: PropTypes.bool.isRequired,
+    userNames: PropTypes.array.isRequired,
+    users: PropTypes.object.isRequired,
   }
 
   state = {
@@ -31,7 +33,7 @@ class Login extends Component {
     localStorage.setItem('active-user', user)
     this.props.dispatch(loginUser(user))
 
-    if (from != '/') {
+    if (from !== '/') {
       this.props.history.push(from)
     } else {
       this.props.history.push('/dashboard')

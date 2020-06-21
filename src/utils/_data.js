@@ -174,14 +174,16 @@ export function _saveQuestion(question) {
 export function _saveQuestionAnswer({ authedUser, qid, answer }) {
   return new Promise((res, rej) => {
     setTimeout(() => {
+      let newAnswer = { [qid]: answer }
       users = {
         ...users,
         [authedUser]: {
           ...users[authedUser],
-          answers: {
-            ...users[authedUser].answers,
-            [qid]: answer,
-          },
+          // answers: {
+          //   ...users[authedUser].answers,
+          //   [qid]: answer,
+          // },
+          answers: Object.assign(users[authedUser].answers, newAnswer),
         },
       }
 
@@ -189,10 +191,19 @@ export function _saveQuestionAnswer({ authedUser, qid, answer }) {
         ...questions,
         [qid]: {
           ...questions[qid],
-          [answer]: {
-            ...questions[qid][answer],
-            votes: questions[qid][answer].votes.concat([authedUser]),
+          optionOne: {
+            ...questions[qid].optionOne,
+            votes: answer === 'optionOne' ? questions[qid].optionOne.votes.concat([authedUser]) : questions[qid].optionOne.votes,
           },
+          optionTwo: {
+            ...questions[qid].optionTwo,
+            votes: answer === 'optionTwo' ? questions[qid].optionTwo.votes.concat([authedUser]) : questions[qid].optionTwo.votes,
+          },
+
+          // [answer]: {
+          //   ...questions[qid][answer],
+          //   votes: questions[qid][answer].votes.concat([authedUser]),
+          // },
         },
       }
 

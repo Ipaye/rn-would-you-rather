@@ -4,9 +4,17 @@ import Navigation from './Navigation'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
+import { handleSaveAnswerToQuestion } from '../actions/questions'
+
 class QuestionDetails extends Component {
   static propTypes = {
-    prop: PropTypes,
+    author: PropTypes.object.isRequired,
+    question: PropTypes.object.isRequired,
+    hasAnsweredQuestion: PropTypes.bool.isRequired,
+  }
+
+  state = {
+    selectedOption: '',
   }
 
   handleCancel = (e) => {
@@ -14,20 +22,47 @@ class QuestionDetails extends Component {
     this.props.history.push('/dashboard')
   }
 
+  handleOptionChange = (e) => {
+    e.preventDefault()
+
+    const value = e.target.value
+    console.log('[value] ->', value)
+
+    this.setState({
+      selectedOption: value,
+    })
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+
+    const { selectedOption } = this.state
+    const { question } = this.props
+
+    this.props.dispatch(handleSaveAnswerToQuestion({ selectedOption, question: question.id }))
+  }
+
   render() {
     const { author } = this.props
+    const { selectedOption } = this.state
     if (!author) {
       return <Redirect to="/404" />
+    }
+    let disabled
+    if (!selectedOption) {
+      disabled = true
+    } else {
+      disabled = false
     }
     return (
       <div className="container">
         <Navigation />
-        <div class="page-header mt-5">
-          <div class="content">
+        <div className="page-header mt-5">
+          <div className="content">
             <div className="content-image">
               <img src={this.props.author.avatarURL} alt="" />
             </div>
-            <div class="content-details">
+            <div className="content-details">
               <h1 className="heading-title">{this.props.author.name} asks</h1>
               <p>answer or view the result of the question asked by ({this.props.author.name})</p>
             </div>
@@ -35,29 +70,29 @@ class QuestionDetails extends Component {
         </div>
 
         {this.props.hasAnsweredQuestion === true ? (
-          <div class="box columns">
-            <div class="column is-7">
+          <div className="box columns">
+            <div className="column is-7">
               <h2 style={{ fontSize: '30px' }}>Results</h2>
 
-              <div class="field mt-4">
-                <label class="label">
+              <div className="field mt-4">
+                <label className="label">
                   {this.props.question.optionOne.votes.length} out of{' '}
                   {this.props.question.optionOne.votes.length + this.props.question.optionTwo.votes.length} votes
                 </label>
-                <div className={this.props.question.optionOne.votes.includes(author.id) ? 'control has-icons-right' : 'control'}>
+                <div className={this.props.question.optionOne.votes.includes(this.props.authenticatedUser) ? 'control has-icons-right' : 'control'}>
                   <input
-                    className={this.props.question.optionOne.votes.includes(author.id) ? 'input is-success' : 'input'}
+                    className={this.props.question.optionOne.votes.includes(this.props.authenticatedUser) ? 'input is-success' : 'input'}
                     disabled
                     type="text"
                     value={this.props.question.optionOne.text}
                   />
-                  {this.props.question.optionOne.votes.includes(author.id) ? (
-                    <span class="icon is-small is-right">
-                      <i class="fas fa-check"></i>
+                  {this.props.question.optionOne.votes.includes(this.props.authenticatedUser) ? (
+                    <span className="icon is-small is-right">
+                      <i className="fas fa-check"></i>
                     </span>
                   ) : null}
                 </div>
-                <p class="help is-success">
+                <p className="help is-success">
                   {(this.props.question.optionOne.votes.length /
                     (this.props.question.optionOne.votes.length + this.props.question.optionTwo.votes.length)) *
                     100}
@@ -65,26 +100,26 @@ class QuestionDetails extends Component {
                 </p>
               </div>
 
-              <div class="field mt-4">
-                <label class="label">
+              <div className="field mt-4">
+                <label className="label">
                   {' '}
                   {this.props.question.optionTwo.votes.length} out of{' '}
                   {this.props.question.optionOne.votes.length + this.props.question.optionTwo.votes.length} votes
                 </label>
-                <div className={this.props.question.optionTwo.votes.includes(author.id) ? 'control has-icons-right' : 'control'}>
+                <div className={this.props.question.optionTwo.votes.includes(this.props.authenticatedUser) ? 'control has-icons-right' : 'control'}>
                   <input
-                    className={this.props.question.optionTwo.votes.includes(author.id) ? 'input is-success' : 'input'}
+                    className={this.props.question.optionTwo.votes.includes(this.props.authenticatedUser) ? 'input is-success' : 'input'}
                     disabled
                     type="text"
                     value={this.props.question.optionTwo.text}
                   />
-                  {this.props.question.optionTwo.votes.includes(author.id) ? (
-                    <span class="icon is-small is-right">
-                      <i class="fas fa-check"></i>
+                  {this.props.question.optionTwo.votes.includes(this.props.authenticatedUser) ? (
+                    <span className="icon is-small is-right">
+                      <i className="fas fa-check"></i>
                     </span>
                   ) : null}
                 </div>
-                <p class="help is-success">
+                <p className="help is-success">
                   {(this.props.question.optionTwo.votes.length /
                     (this.props.question.optionOne.votes.length + this.props.question.optionTwo.votes.length)) *
                     100}
@@ -92,9 +127,9 @@ class QuestionDetails extends Component {
                 </p>
               </div>
 
-              <div class="field is-grouped mt-5">
-                <div class="control">
-                  <button onClick={this.handleCancel} class="button is-link is-light">
+              <div className="field is-grouped mt-5">
+                <div className="control">
+                  <button onClick={this.handleCancel} className="button is-link is-light">
                     Back
                   </button>
                 </div>
@@ -102,34 +137,48 @@ class QuestionDetails extends Component {
             </div>
           </div>
         ) : (
-          <div class="box columns">
-            <div class="column is-7">
+          <div className="box columns">
+            <div className="column is-7">
               <h2 style={{ fontSize: '30px' }}>Would you Rather ?</h2>
 
-              <div class="field mt-4">
-                <div class="control">
-                  <label class="radio">
-                    <input type="radio" name="question" value={this.props.question.optionOne.text} />
+              <div className="field mt-4">
+                <div className="control">
+                  <label className="radio">
+                    <input
+                      type="radio"
+                      name="question"
+                      onChange={this.handleOptionChange}
+                      checked={selectedOption === 'optionOne'}
+                      value="optionOne"
+                    />
                     {this.props.question.optionOne.text}
                   </label>
                 </div>
               </div>
 
-              <div class="field mt-2 mb-4">
-                <div class="control">
-                  <label class="radio">
-                    <input type="radio" name="question" value={this.props.question.optionTwo.text} />
+              <div className="field mt-2 mb-4">
+                <div className="control">
+                  <label className="radio">
+                    <input
+                      type="radio"
+                      name="question"
+                      onChange={this.handleOptionChange}
+                      checked={selectedOption === 'optionTwo'}
+                      value="optionTwo"
+                    />
                     {this.props.question.optionTwo.text}
                   </label>
                 </div>
               </div>
 
-              <div class="field is-grouped">
-                <div class="control">
-                  <button class="button is-link">Submit</button>
+              <div className="field is-grouped">
+                <div className="control" onClick={this.handleSubmit}>
+                  <button className="button is-link" disabled={disabled}>
+                    Submit
+                  </button>
                 </div>
-                <div class="control">
-                  <button onClick={this.handleCancel} class="button is-link is-light">
+                <div className="control">
+                  <button onClick={this.handleCancel} className="button is-link is-light">
                     Cancel
                   </button>
                 </div>
@@ -143,11 +192,9 @@ class QuestionDetails extends Component {
 }
 
 function mapStateToProps({ users, authenticatedUser, questions }, props) {
-  console.log('[props] ->', props)
   const { id } = props.match.params
   const question = questions[id]
   let author
-  console.log('[question, id ] ->', props.history)
   if (question) {
     author = users[question.author]
   }

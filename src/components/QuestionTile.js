@@ -5,7 +5,8 @@ import { Link, withRouter } from 'react-router-dom'
 
 class QuestionTile extends Component {
   static propTypes = {
-    prop: PropTypes,
+    question: PropTypes.object.isRequired,
+    author: PropTypes.object.isRequired,
   }
 
   render() {
@@ -28,7 +29,7 @@ class QuestionTile extends Component {
                 </div>
               </div>
               <nav className="level is-mobile">
-                <Link to={`/question/${this.props.question.id}`} className="button">
+                <Link to={`/questions/${this.props.question.id}`} className="button">
                   View Poll
                 </Link>
               </nav>
