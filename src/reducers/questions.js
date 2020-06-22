@@ -8,7 +8,8 @@ export default function questions(state = {}, action) {
         ...action.questions,
       }
     case SAVE_QUESTION_ANSWER:
-      const { authedUser, qid, answer } = action
+      const { authenticatedUser, qid, answer } = action
+      console.log('[auth  ] ->', authenticatedUser, qid, answer)
 
       return {
         ...state,
@@ -16,17 +17,11 @@ export default function questions(state = {}, action) {
           ...state[qid],
           optionOne: {
             ...state[qid].optionOne,
-            votes: [
-              ...state[qid].optionOne.votes,
-              answer === state[qid].optionOne ? state[qid].optionOne.votes.concat(authedUser) : state[qid].optionOne.votes,
-            ],
+            votes: answer === 'optionOne' ? state[qid].optionOne.votes.concat([authenticatedUser]) : state[qid].optionOne.votes,
           },
           optionTwo: {
             ...state[qid].optionTwo,
-            votes: [
-              ...state[qid].optionTwo.votes,
-              answer === state[qid].optionTwo ? state[qid].optionTwo.votes.concat(authedUser) : state[qid].optionTwo.votes,
-            ],
+            votes: answer === 'optionTwo' ? state[qid].optionTwo.votes.concat([authenticatedUser]) : state[qid].optionTwo.votes,
           },
         },
       }
