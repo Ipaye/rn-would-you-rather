@@ -41,20 +41,21 @@ class Navigation extends Component {
               New Question
             </NavLink>
           </div>
-
-          <div className="navbar-end">
-            <div className="navbar-item profile">
-              <img src={this.props.activeUser.avatarURL} alt="ipaye alameen" />
-              <p className="ml-2">{this.props.activeUser.name}</p>
-            </div>
-            <div className="navbar-item">
-              <div className="buttons">
-                <button onClick={this.handleLogout} className="button is-light">
-                  Log out
-                </button>
+          {this.props.login != true ? (
+            <div className="navbar-end">
+              <div className="navbar-item profile">
+                <img src={this.props.activeUser.avatarURL} alt="ipaye alameen" />
+                <p className="ml-2">{this.props.activeUser.name}</p>
+              </div>
+              <div className="navbar-item">
+                <div className="buttons">
+                  <button onClick={this.handleLogout} className="button is-light">
+                    Log out
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          ) : null}
         </div>
       </nav>
     )

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { loginUser } from '../actions/auth'
+import Navigation from './Navigation'
 
 class Login extends Component {
   static propTypes = {
@@ -43,41 +44,46 @@ class Login extends Component {
   render() {
     const { users, userNames } = this.props
     return (
-      <div className="auth-bg">
-        <div className="auth-container">
-          <div className="auth-card">
-            <div className="column">
-              <h1 className="login-title">Answering polls questions as you like </h1>
-              <h6 className="login-subtitle"> Welcome Back, Please login to your account.</h6>
-            </div>
-            <div className="column">
-              <div className="field">
-                <label className="label">Users</label>
-                <div className="control">
-                  <div className="select is-normal is-fullwidth">
-                    <select onChange={this.handleOnChange}>
-                      <option hidden>Select a user</option>
-                      {userNames.map((user) => (
-                        <option key={users[user].id} value={users[user].id}>
-                          {users[user].name}
-                        </option>
-                      ))}
-                    </select>
+      <>
+        <div class="container">
+          <Navigation login={true} />
+        </div>
+        <div className="auth-bg">
+          <div className="auth-container">
+            <div className="auth-card">
+              <div className="column">
+                <h1 className="login-title">Answering polls questions as you like </h1>
+                <h6 className="login-subtitle"> Welcome Back, Please login to your account.</h6>
+              </div>
+              <div className="column">
+                <div className="field">
+                  <label className="label">Users</label>
+                  <div className="control">
+                    <div className="select is-normal is-fullwidth">
+                      <select onChange={this.handleOnChange}>
+                        <option hidden>Select a user</option>
+                        {userNames.map((user) => (
+                          <option key={users[user].id} value={users[user].id}>
+                            {users[user].name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="field">
-                <div className="control">
-                  <button className="button is-fullwidth is-link" onClick={this.handleLogin}>
-                    Submit
-                  </button>
+                <div className="field">
+                  <div className="control">
+                    <button className="button is-fullwidth is-link" onClick={this.handleLogin}>
+                      Submit
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </>
     )
   }
 }
