@@ -23,8 +23,6 @@ class QuestionDetails extends Component {
   }
 
   handleOptionChange = (e) => {
-    e.preventDefault()
-
     const value = e.target.value
     console.log('[value] ->', value)
 
@@ -93,9 +91,11 @@ class QuestionDetails extends Component {
                   ) : null}
                 </div>
                 <p className="help is-success">
-                  {(this.props.question.optionOne.votes.length /
-                    (this.props.question.optionOne.votes.length + this.props.question.optionTwo.votes.length)) *
-                    100}
+                  {(
+                    (this.props.question.optionOne.votes.length /
+                      (this.props.question.optionOne.votes.length + this.props.question.optionTwo.votes.length)) *
+                    100
+                  ).toFixed(2)}
                   % voted for this
                 </p>
               </div>
@@ -120,9 +120,11 @@ class QuestionDetails extends Component {
                   ) : null}
                 </div>
                 <p className="help is-success">
-                  {(this.props.question.optionTwo.votes.length /
-                    (this.props.question.optionOne.votes.length + this.props.question.optionTwo.votes.length)) *
-                    100}
+                  {(
+                    (this.props.question.optionTwo.votes.length /
+                      (this.props.question.optionOne.votes.length + this.props.question.optionTwo.votes.length)) *
+                    100
+                  ).toFixed(2)}
                   % voted for this
                 </p>
               </div>

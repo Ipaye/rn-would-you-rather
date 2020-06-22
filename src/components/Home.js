@@ -89,7 +89,7 @@ function mapStateToProps({ authenticatedUser, users, questions }) {
   return {
     loading: questions ? false : true,
     answeredQuestions,
-    unAnsweredQuestions: unAnsweredQuestions.reverse(),
+    unAnsweredQuestions,
   }
 }
 
