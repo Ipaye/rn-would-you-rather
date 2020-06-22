@@ -45,7 +45,7 @@ class Login extends Component {
     const { users, userNames } = this.props
     return (
       <>
-        <div class="container">
+        <div className="container">
           <Navigation login={true} />
         </div>
         <div className="auth-bg">

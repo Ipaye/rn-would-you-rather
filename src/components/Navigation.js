@@ -41,7 +41,7 @@ class Navigation extends Component {
               New Question
             </NavLink>
           </div>
-          {this.props.login != true ? (
+          {this.props.login !== true ? (
             <div className="navbar-end">
               <div className="navbar-item profile">
                 <img src={this.props.activeUser.avatarURL} alt="ipaye alameen" />
